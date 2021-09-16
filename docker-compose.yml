@@ -32,3 +32,22 @@ services:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/volumes:/var/lib/mysql
     command: mysqld
+
+  db_migrate:
+    image: migrate/migrate
+    container_name: db_migrate
+    links:
+      - db
+    volumes:
+      - ./db/migrations:/migrations
+    entrypoint:
+      sh -c "
+        until migrate -path /migrations -database 'mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DATABASE}' up; do
+
+          echo 'waiting for mysql to be connectable...'
+
+          sleep 2
+        
+        done
+
+      "
