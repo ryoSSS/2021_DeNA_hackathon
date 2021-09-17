@@ -1,0 +1,11 @@
+.env
+
+# backend
+/backend/tmp
+
+# db
+/db/volumes
+
+# frontend
+/node_modules
+
