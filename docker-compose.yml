@@ -50,7 +50,7 @@ services:
 
             echo 'waiting for mysql to be connectable...'
 
-            sleep 2
+            sleep 5
 
           done
 
