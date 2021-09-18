@@ -29,7 +29,7 @@ func (h *UserHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	birthday, err := time.Parse("2006-01-02", param.Birthday)
+	birthday, err := time.Parse("2006/01/02", param.Birthday)
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "invalid format birthday")
