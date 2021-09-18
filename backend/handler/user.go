@@ -46,7 +46,7 @@ func (h *UserHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	return c.JSON(http.StatusOK, id)
+	return c.JSON(http.StatusOK, model.CreateUserResponse{ID: id})
 }
 
 func (h *UserHandler) GetWithMessages(c echo.Context) error {
