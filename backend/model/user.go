@@ -22,5 +22,5 @@ type UserWithMessages struct {
 }
 
 type CreateUserResponse struct {
-	ID int64 `json:"user_id"`
+	ID int64 `json:"userId"`
 }

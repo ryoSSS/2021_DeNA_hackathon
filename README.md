@@ -37,7 +37,7 @@ $ docker compose up
     - name: string
     - birthday: string (format未定)
   - Response
-    - user_id: int
+    - userId: int
   
 
 - [GET] /users/:id
@@ -52,6 +52,8 @@ $ docker compose up
 
 - [POST] /messages
   -  Request
-     -  user_id: int
-     -  content: strings
+     -  userId: int
+     -  content: string
+  -  Response
+     -  messageId: int
 
