@@ -5,7 +5,7 @@ export default function Home() {
 	const router = useRouter();
 
 	const buttonClick = () => {
-		router.push("/user");
+		router.push("/users");
 	};
 	return (
 		<div className="">

@@ -1,6 +1,7 @@
+import { NextPage } from "next";
 import { useState } from "react";
 
-const User = () => {
+const Users: NextPage = () => {
 	const [name, setName] = useState<string>("");
 	const [birthday, setBirthday] = useState<string>("");
 	const [link, setLink] = useState<string>("");
@@ -121,4 +122,4 @@ const User = () => {
 	);
 };
 
-export default User;
+export default Users;
