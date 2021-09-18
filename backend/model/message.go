@@ -12,3 +12,8 @@ type Message struct {
 type CreateMessageResponse struct {
 	ID int64 `json:"messageId"`
 }
+
+type CreateMessageParam struct {
+	Content string `json:"content"`
+	UserId  int64  `json:"userId"`
+}

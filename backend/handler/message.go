@@ -12,11 +12,6 @@ type MessageHandler struct {
 	messageContoller *controller.MessageController
 }
 
-type CreateMessageParam struct {
-	Content string `json:"content"`
-	UserId  int64  `json:"user_id"`
-}
-
 func NewMessageHandler(
 	messageController *controller.MessageController,
 ) *MessageHandler {
@@ -26,7 +21,7 @@ func NewMessageHandler(
 }
 
 func (h *MessageHandler) Create(c echo.Context) error {
-	var param CreateMessageParam
+	var param model.CreateMessageParam
 	if err := c.Bind(&param); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
