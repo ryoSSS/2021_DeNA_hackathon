@@ -16,6 +16,14 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
+	e.POST("/users", func(c echo.Context) error {
+		return c.String(http.StatusOK, "user post")
+	})
+
+	e.GET("/users/:id", func(c echo.Context) error {
+		return c.String(http.StatusOK, c.Param("id"))
+	})
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
