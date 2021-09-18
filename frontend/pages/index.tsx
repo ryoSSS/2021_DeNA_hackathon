@@ -5,7 +5,7 @@ export default function Home() {
 	const router = useRouter();
 
 	const buttonClick = () => {
-		router.push("/user");
+		router.push("/users");
 	};
 	return (
 		<div className="">
@@ -16,10 +16,12 @@ export default function Home() {
 			</Head>
 			<main className="">
 				<div
-					className="object-contain w-full h-screen "
+					className="object-contain w-full h-screen"
 					style={{
 						backgroundImage: `url('/elnaz-asadi-RczTV4UAkw0-unsplash.jpg')`,
-						objectFit: "fill",
+						backgroundSize: "cover",
+						backgroundPosition: "center center",
+						backgroundRepeat: "no-repeat",
 					}}
 				>
 					<div className="py-40">
