@@ -2,10 +2,10 @@ package handler
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/controller"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
 )
 
 type UserHandler struct {
@@ -22,7 +22,13 @@ func NewUserHandler(
 
 func (h *UserHandler) Create(c echo.Context) error {
 
-	id, err := h.userContoller.Create("name", time.Now())
+	user := model.User{}
+
+	if err := c.Bind(user); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	id, err := h.userContoller.Create(&user)
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)

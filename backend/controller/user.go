@@ -1,9 +1,8 @@
 package controller
 
 import (
-	"time"
-
 	"github.com/jmoiron/sqlx"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/repository"
 )
 
@@ -17,6 +16,6 @@ func NewUserController(db *sqlx.DB) *UserController {
 	}
 }
 
-func (u *UserController) Create(name string, birthday time.Time) (int64, error) {
-	return repository.InsertUser(u.db, name, birthday)
+func (u *UserController) Create(user *model.User) (int64, error) {
+	return repository.InsertUser(u.db, user)
 }
