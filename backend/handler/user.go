@@ -25,7 +25,7 @@ func (h *UserHandler) Create(c echo.Context) error {
 	id, err := h.userContoller.Create("name", time.Now())
 
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, "No create")
+		return c.JSON(http.StatusBadRequest, err)
 	}
 
 	return c.JSON(http.StatusOK, id)
