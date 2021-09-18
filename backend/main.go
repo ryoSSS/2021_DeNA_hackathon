@@ -10,6 +10,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/config"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/controller"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/handler"
 )
 
 func main() {
@@ -24,13 +26,14 @@ func main() {
 	}
 	_ = db // あとで消す
 
+	userContoller := controller.NewUserController(db)
+	userHandler := handler.NewUserHandler(userContoller)
+
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	e.POST("/users", func(c echo.Context) error {
-		return c.String(http.StatusOK, "user post")
-	})
+	e.POST("/users", userHandler.Create)
 
 	e.GET("/users/:id", func(c echo.Context) error {
 		return c.String(http.StatusOK, c.Param("id"))
