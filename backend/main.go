@@ -37,9 +37,7 @@ func main() {
 
 	e.POST("/users", userHandler.Create)
 
-	e.GET("/users/:id", func(c echo.Context) error {
-		return c.String(http.StatusOK, c.Param("id"))
-	})
+	e.GET("/users/:id", userHandler.GetWithMessages)
 
 	e.POST("/messages", messageHandler.Create)
 

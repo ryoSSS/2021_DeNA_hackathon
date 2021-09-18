@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -46,4 +47,17 @@ func (h *UserHandler) Create(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, id)
+}
+
+func (h *UserHandler) GetWithMessages(c echo.Context) error {
+	id := c.Param("id")
+	userId, err := strconv.ParseInt(id, 10, 64)
+
+	user, err := h.userContoller.GetWithMessages(userId)
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	return c.JSON(http.StatusOK, user)
 }

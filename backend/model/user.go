@@ -13,3 +13,10 @@ type CreateUserParam struct {
 	Name     string `db:"name"`
 	Birthday string `db:"birthday"`
 }
+
+type UserWithMessages struct {
+	ID       int64     `json:"id"`
+	Name     string    `json:"name"`
+	Birthday time.Time `json:"birthday"`
+	Messages []Message `json:"messages"`
+}
