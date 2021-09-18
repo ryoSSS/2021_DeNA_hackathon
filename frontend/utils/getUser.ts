@@ -1,4 +1,3 @@
-import path from "path";
 import type { User } from "../models";
 
 type Response = {
@@ -9,7 +8,7 @@ type Response = {
 // [GET] /users/:user_id
 async function getUser(userId: number): Promise<Response> {
 	const res = await fetch(
-		path.join(process.env["API_DOMAIN"], "users", userId.toString())
+		`${process.env["NEXT_PUBLIC_API_DOMAIN"]}/users/${userId.toString()}`
 	);
 	const data: User = await res.json();
 

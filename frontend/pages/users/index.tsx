@@ -1,3 +1,4 @@
+import createUser from "../../utils/createUser";
 import { NextPage } from "next";
 import { useState } from "react";
 
@@ -48,8 +49,10 @@ const Users: NextPage = () => {
 		} else {
 			// データベースへの処理
 			// await toDatebase()
-			setLink("https://....");
-			setOpenModal(true);
+			const res = await createUser(name, birthday);
+			const userId = res.data.userId
+			setLink(`${process.env.NEXT_PUBLIC_API_DOMAIN}/users/${userId}`);
+			setOpenModal(true)
 		}
 	};
 	return (

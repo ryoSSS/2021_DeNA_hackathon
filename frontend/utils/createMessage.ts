@@ -1,4 +1,3 @@
-import path from "path";
 import type { User, Message } from "../models";
 
 type Body = {
@@ -13,8 +12,11 @@ type Response = {
 // [POST] /messages
 async function createUser(userId: number, content: string): Promise<Response> {
 	const body: Body = { userId, content };
-	const res = await fetch(path.join(process.env["API_DOMAIN"], "messages"), {
+	const res = await fetch(`${process.env["NEXT_PUBLIC_API_DOMAIN"]}/messages`, {
 		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
 		body: JSON.stringify(body),
 	});
 
