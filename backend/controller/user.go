@@ -19,3 +19,24 @@ func NewUserController(db *sqlx.DB) *UserController {
 func (u *UserController) Create(user *model.User) (int64, error) {
 	return repository.InsertUser(u.db, user)
 }
+
+func (u *UserController) GetWithMessages(userId int64) (*model.UserWithMessages, error) {
+	user, err := repository.GetUser(u.db, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	messages, err := repository.GetMessagesByUserId(u.db, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	userWithMessages := model.UserWithMessages{
+		ID:       user.ID,
+		Name:     user.Name,
+		Birthday: user.Birthday,
+		Messages: messages,
+	}
+
+	return &userWithMessages, nil
+}

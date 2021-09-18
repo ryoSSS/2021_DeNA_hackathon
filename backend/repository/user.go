@@ -13,3 +13,13 @@ func InsertUser(db *sqlx.DB, user *model.User) (int64, error) {
 
 	return result.LastInsertId()
 }
+
+func GetUser(db *sqlx.DB, userId int64) (*model.User, error) {
+	user := model.User{}
+	err := db.Get(&user, "select * from users where id = ?", userId)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}

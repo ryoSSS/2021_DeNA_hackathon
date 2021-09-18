@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/jmoiron/sqlx"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
 )
 
 func InsertMessage(db *sqlx.DB, content string, userId int64) (int64, error) {
@@ -11,4 +12,14 @@ func InsertMessage(db *sqlx.DB, content string, userId int64) (int64, error) {
 	}
 
 	return result.LastInsertId()
+}
+
+func GetMessagesByUserId(db *sqlx.DB, userId int64) ([]model.Message, error) {
+	messages := []model.Message{}
+	err := db.Select(&messages, "select * from messages where user_id = ?", userId)
+	if err != nil {
+		return nil, err
+	}
+
+	return messages, nil
 }
