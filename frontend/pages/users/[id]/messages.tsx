@@ -1,23 +1,27 @@
-import { NextPage } from "next";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Message } from "../../../models/Message";
+import { NextPage, GetServerSideProps } from "next";
+import { useEffect } from "react";
 import GlassmorphismBox from "../../../components/GlassmorphismBox";
+import useUser from "../../../hooks/useUser";
+import getUser from "../../../utils/getUser";
+import { User } from "../../../models/User";
+import Error from "next/error";
 
-const UsersIdMessages: NextPage = () => {
-	const router = useRouter();
+type MessagesProps = {
+	status: number;
+	data?: User;
+};
 
-	const [id, setId] = useState<string>("");
-	const [messages, setMessages] = useState<Message[]>([]);
+const UsersIdMessages: NextPage<MessagesProps> = (props) => {
+	const { user, setUser } = useUser();
 
 	useEffect(() => {
-		if (router.asPath !== router.route) {
-			setId(String(router.query.id));
-			//
-			// TODO: storeチェック
-			//
-		}
-	}, [router]);
+		if (props.status !== 200) return;
+		setUser(props.data);
+	}, [props, setUser]);
+
+	if (props.status !== 200) {
+		return <Error statusCode={props.status} />;
+	}
 	return (
 		<>
 			<div
@@ -30,18 +34,37 @@ const UsersIdMessages: NextPage = () => {
 				}}
 			>
 				<div className="grid h-screen grid-cols-2 py-4 overflow-y-scroll md:grid-cols-3">
-					{messages.map((message) => {
-						return (
-							<GlassmorphismBox
-								key={message.id}
-								className="h-40 px-3 py-4 mx-4 my-2 text-center"
-							>
-								<div className="h-full overflow-y-scroll">
-									<h1 className="font-semibold">{message.content}</h1>
-								</div>
-							</GlassmorphismBox>
-						);
-					})}
+					{user.messages ? (
+						<>
+							{user.messages.map((message) => {
+								return (
+									<GlassmorphismBox
+										key={message.id}
+										className="h-40 px-3 py-4 mx-4 my-2 text-center"
+									>
+										<div className="h-full overflow-y-scroll">
+											<h1 className="font-semibold">{message.content}</h1>
+										</div>
+									</GlassmorphismBox>
+								);
+							})}
+						</>
+					) : (
+						<>
+							{props.data.messages.map((message) => {
+								return (
+									<GlassmorphismBox
+										key={message.id}
+										className="h-40 px-3 py-4 mx-4 my-2 text-center"
+									>
+										<div className="h-full overflow-y-scroll">
+											<h1 className="font-semibold">{message.content}</h1>
+										</div>
+									</GlassmorphismBox>
+								);
+							})}
+						</>
+					)}
 				</div>
 			</div>
 		</>
@@ -49,3 +72,18 @@ const UsersIdMessages: NextPage = () => {
 };
 
 export default UsersIdMessages;
+
+export const getServerSideProps: GetServerSideProps<any> = async (
+	context: any
+) => {
+	try {
+		const { id } = context.query;
+		console.log(id);
+		const res = await getUser(id);
+		if (res.error) return { props: { status: 404, data: {} } };
+		console.log(res.data);
+		return { props: { status: 200, data: res.data } };
+	} catch (e) {
+		return { props: { status: 500, data: {} } };
+	}
+};
