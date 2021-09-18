@@ -3,7 +3,6 @@ package handler
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/controller"
@@ -29,11 +28,7 @@ func (h *UserHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	birthday, err := time.Parse("2006/01/02", param.Birthday)
-
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, "invalid format birthday")
-	}
+	birthday := param.Birthday.Time
 
 	user := model.User{
 		Name:     param.Name,

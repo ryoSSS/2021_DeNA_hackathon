@@ -34,7 +34,7 @@ func (u *UserController) GetWithMessages(userId int64) (*model.UserWithMessages,
 	userWithMessages := model.UserWithMessages{
 		ID:       user.ID,
 		Name:     user.Name,
-		Birthday: user.Birthday,
+		Birthday: model.NewDate(user.Birthday),
 		Messages: messages,
 	}
 
