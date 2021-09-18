@@ -7,12 +7,14 @@ services:
       dockerfile: Dockerfile
       target: dev
     container_name: backend
+    environment:
+      PORT: 80
     env_file:
       - .env
     links:
       - db
     ports:
-      - 8080:8080
+      - 80:80
     tty: true
     volumes:
       - ./backend:/go/src/github.com/ryoSSS/2021_DeNA_hackathon/backend
