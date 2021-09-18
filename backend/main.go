@@ -24,10 +24,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	_ = db // あとで消す
 
 	userContoller := controller.NewUserController(db)
 	userHandler := handler.NewUserHandler(userContoller)
+
+	messageController := controller.NewMessageController(db)
+	messageHandler := handler.NewMessageHandler(messageController)
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
@@ -38,6 +40,8 @@ func main() {
 	e.GET("/users/:id", func(c echo.Context) error {
 		return c.String(http.StatusOK, c.Param("id"))
 	})
+
+	e.POST("/messages", messageHandler.Create)
 
 	port := os.Getenv("PORT")
 	if port == "" {
