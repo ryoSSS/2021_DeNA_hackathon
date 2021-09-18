@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/jmoiron/sqlx"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/repository"
 )
 
@@ -15,6 +16,6 @@ func NewMessageController(db *sqlx.DB) *MessageController {
 	}
 }
 
-func (u *MessageController) Create(content string, userId int64) (int64, error) {
-	return repository.InsertMessage(u.db, content, userId)
+func (u *MessageController) Create(message *model.Message) (int64, error) {
+	return repository.InsertMessage(u.db, message)
 }

@@ -26,7 +26,14 @@ func (h *MessageHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	id, err := h.messageContoller.Create(param.Content, param.UserId)
+	message := model.Message{
+		Content:    param.Content,
+		UserId:     param.UserId,
+		ObjectId:   param.ObjectId,
+		WriterName: param.WriterName,
+	}
+
+	id, err := h.messageContoller.Create(&message)
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
