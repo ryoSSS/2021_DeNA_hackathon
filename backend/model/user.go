@@ -20,3 +20,7 @@ type UserWithMessages struct {
 	Birthday time.Time `json:"birthday"`
 	Messages []Message `json:"messages"`
 }
+
+type CreateUserResponse struct {
+	ID int64 `json:"id"`
+}

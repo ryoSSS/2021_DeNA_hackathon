@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/controller"
+	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
 )
 
 type MessageHandler struct {
@@ -36,5 +37,5 @@ func (h *MessageHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	return c.JSON(http.StatusOK, id)
+	return c.JSON(http.StatusOK, model.CreateMessageResponse{ID: id})
 }
