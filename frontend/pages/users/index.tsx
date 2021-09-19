@@ -2,6 +2,14 @@ import createUser from "../../utils/createUser";
 import { NextPage } from "next";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import {
+	FacebookIcon,
+	FacebookShareButton,
+	LineIcon,
+	LineShareButton,
+	TwitterIcon,
+	TwitterShareButton,
+} from "react-share";
 
 const notify = () => toast("コピーできました！");
 
@@ -72,6 +80,10 @@ const Users: NextPage = () => {
 				{openModal ? (
 					<>
 						<div className="flex flex-col md:pt-40 pt-52">
+							<h1 className="text-center font-semibold text-md text-gray-800 mb-8">
+								URLをシェアしてみんなに祝ってもらおう！
+							</h1>
+
 							<input
 								type="text"
 								placeholder="https://...."
@@ -91,6 +103,19 @@ const Users: NextPage = () => {
 							>
 								リンクをコピー
 							</button>
+
+							<div className="mt-6 w-full flex justify-center space-x-4">
+								<FacebookShareButton url={link} title="HAPPILY">
+									<FacebookIcon size={32} round />
+								</FacebookShareButton>
+								<TwitterShareButton url={link} title="HAPPILY">
+									<TwitterIcon size={32} round />
+								</TwitterShareButton>
+								<LineShareButton url={link} title="HAPPILY">
+									<LineIcon size={32} round />
+								</LineShareButton>
+							</div>
+
 							<Toaster />
 						</div>
 					</>
