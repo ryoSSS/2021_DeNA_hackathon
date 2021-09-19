@@ -51,7 +51,7 @@ const Users: NextPage = () => {
 			// await toDatebase()
 			const res = await createUser(name, birthday);
 			const userId = res.data.userId;
-			setLink(`${process.env.NEXT_PUBLIC_API_DOMAIN}/users/${userId}`);
+			setLink(`${location.href}/${userId}`);
 			setOpenModal(true);
 		}
 	};
