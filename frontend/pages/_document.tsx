@@ -32,7 +32,7 @@ class MyDocument extends Document<Props>{
 <meta property="og:url" content="" />
 <meta
   property="og:image"
-            content={"http://localhost:80/users/"+id +"/image"}
+            content={"http://18.181.171.44:80/users/"+id +"/image"}
 />
 <meta property="og:site_name" content="HAPPLY" />
 <meta name="twitter:card" content="summary_large_image" />
