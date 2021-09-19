@@ -4,6 +4,8 @@ RUN apt-get update && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     echo "Asia/Tokyo" > /etc/timezone
 
+RUN apt install -y fonts-ipafont
+
 ENV PORT 8080
 EXPOSE 8080
 
