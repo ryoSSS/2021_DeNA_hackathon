@@ -38,7 +38,7 @@ RUN set -x && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /go/bin/server /server
-COPY --from=builder ./assets/ /assets/
+COPY --from=builder /go/src/github.com/ryoSSS/2021_DeNA_hackathon/backend/assets/ /assets/
 COPY --from=base /etc/alternatives/fonts-japanese-gothic.ttf /etc/alternatives/fonts-japanese-gothic.ttf
 
 CMD [ "/server" ]
