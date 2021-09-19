@@ -23,7 +23,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [writerName, setWriterName] = useState("");
 	const [content, setContent] = useState("");
-	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [selectedIndex, setSelectedIndex] = useState(1);
 	const _user = user ? user : props.data;
 
 	const onselectionchange = (index: number) => {
@@ -150,6 +150,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 							</h3>
 							<CarouselSelect
 								selectedIndex={selectedIndex}
+								idBlackList={_user.messages.map((message) => message.objectId)}
 								onChange={onselectionchange}
 							/>
 						</section>
@@ -160,7 +161,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 									rows={4}
 									cols={40}
 									placeholder="お誕生日おめでとう！素敵な一年になりますように！"
-									className="mt-3 p-2 border border-gray-300 rounded-md resize-none"
+									className="w-full mt-3 p-2 border border-gray-300 text-sm rounded-md resize-none"
 									value={content}
 									onChange={(e) => setContent(e.target.value)}
 								></textarea>
@@ -188,36 +189,36 @@ export const getServerSideProps: GetServerSideProps<any> = async (
 	context: any
 ) => {
 	// mock
-	return {
-		props: {
-			status: 200,
-			data: {
-				id: 1,
-				name: "taro",
-				birthday: "2000/01/01",
-				messages: [
-					{
-						id: 1,
-						content: "お誕生日おめでとう！",
-						writerName: "John",
-						objectId: 0,
-					},
-					{
-						id: 2,
-						content: "あけましておめでとう！",
-						writerName: "John",
-						objectId: 1,
-					},
-					{
-						id: 3,
-						content: "おはよう！".repeat(30),
-						writerName: "Johnnnnnnnnnnnn",
-						objectId: 2,
-					},
-				],
-			},
-		},
-	};
+	// return {
+	// 	props: {
+	// 		status: 200,
+	// 		data: {
+	// 			id: 1,
+	// 			name: "taro",
+	// 			birthday: "2000/01/01",
+	// 			messages: [
+	// 				{
+	// 					id: 1,
+	// 					content: "お誕生日おめでとう！",
+	// 					writerName: "John",
+	// 					objectId: 1,
+	// 				},
+	// 				{
+	// 					id: 2,
+	// 					content: "あけましておめでとう！",
+	// 					writerName: "John",
+	// 					objectId: 3,
+	// 				},
+	// 				{
+	// 					id: 3,
+	// 					content: "おはよう！".repeat(30),
+	// 					writerName: "Johnnnnnnnnnnnn",
+	// 					objectId: 5,
+	// 				},
+	// 			],
+	// 		},
+	// 	},
+	// };
 
 	try {
 		const { id } = context.query;
