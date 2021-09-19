@@ -37,6 +37,8 @@ RUN set -x && \
       ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /go/bin/server /go/bin/server
+COPY --from=builder /go/bin/server /server
+COPY --from=builder /go/src/github.com/ryoSSS/2021_DeNA_hackathon/backend/assets/ /assets/
+COPY --from=base /etc/alternatives/fonts-japanese-gothic.ttf /etc/alternatives/fonts-japanese-gothic.ttf
 
-CMD [ "/go/bin/server" ]
+CMD [ "/server" ]

@@ -3,6 +3,8 @@ import Image from "next/image";
 import useUser from "../../../hooks/useUser";
 import getUser from "../../../utils/getUser";
 import { User } from "../../../models";
+import confetti from "canvas-confetti";
+import { useEffect } from "react";
 
 type MessagesProps = {
 	status: number;
@@ -10,6 +12,33 @@ type MessagesProps = {
 };
 
 const Messages: NextPage<MessagesProps> = (props) => {
+	useEffect(() => {
+		var end = Date.now() + 1 * 1000;
+
+		// go Buckeyes!
+		var colors = ["#ff7dda", "#42c9ff", "#c4ff4e", "#afff96"];
+
+		(function frame() {
+			confetti({
+				particleCount: 4,
+				angle: 60,
+				spread: 55,
+				origin: { x: 0 },
+				colors: colors,
+			});
+			confetti({
+				particleCount: 4,
+				angle: 120,
+				spread: 55,
+				origin: { x: 1 },
+				colors: colors,
+			});
+
+			if (Date.now() < end) {
+				requestAnimationFrame(frame);
+			}
+		})();
+	}, []);
 	const { user, setUser } = useUser();
 	const _user = user ? user : props.data;
 
