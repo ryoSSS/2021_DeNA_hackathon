@@ -18,6 +18,10 @@ const OBJECTS: ObjectType[] = [
 	{ id: 11, name: "coin", imageSrc: "/present/11.svg" },
 	{ id: 12, name: "plant", imageSrc: "/present/12.svg" },
 	{ id: 13, name: "purple_balloon", imageSrc: "/present/13.svg" },
+	{ id: 14, name: "choco", imageSrc: "/present/14.svg" },
+	{ id: 15, name: "water", imageSrc: "/present/15.svg" },
+	{ id: 16, name: "car", imageSrc: "/present/16.svg" },
+	{ id: 17, name: "popcorn", imageSrc: "/present/17.svg" },
 ];
 
 export default OBJECTS;

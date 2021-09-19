@@ -208,6 +208,54 @@ const Messages: NextPage<MessagesProps> = (props) => {
 								/>
 							</div>
 						)}
+
+						{/* choco */}
+						{message.objectId === 14 && (
+							<div className="absolute top-[20%] right-[10%]">
+								<Image
+									alt="画像"
+									src="/present/14.svg"
+									height={150}
+									width={150}
+								/>
+							</div>
+						)}
+
+						{/* water */}
+						{message.objectId === 15 && (
+							<div className="absolute top-[10%] left-[5%]">
+								<Image
+									alt="画像"
+									src="/present/15.svg"
+									height={100}
+									width={100}
+								/>
+							</div>
+						)}
+
+						{/* car */}
+						{message.objectId === 16 && (
+							<div className="absolute bottom-[45%] left-[5%]">
+								<Image
+									alt="画像"
+									src="/present/16.svg"
+									height={100}
+									width={100}
+								/>
+							</div>
+						)}
+
+						{/* popcorn */}
+						{message.objectId === 17 && (
+							<div className="absolute bottom-[28%] right-[5%]">
+								<Image
+									alt="画像"
+									src="/present/17.svg"
+									height={200}
+									width={200}
+								/>
+							</div>
+						)}
 					</div>
 				))}
 				{/* cake */}
