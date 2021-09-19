@@ -90,7 +90,9 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 						<ul className="flex flex-col space-y-4">
 							{_user.messages.map((message) => (
 								<li key={message.id}>
-									<MessageBox>{message.content}</MessageBox>
+									<MessageBox writerName={message.writerName}>
+										{message.content}
+									</MessageBox>
 								</li>
 							))}
 						</ul>
@@ -186,21 +188,36 @@ export const getServerSideProps: GetServerSideProps<any> = async (
 	context: any
 ) => {
 	// mock
-	// return {
-	// 	props: {
-	// 		status: 200,
-	// 		data: {
-	// 			id: 1,
-	// 			name: "taro",
-	// 			birthday: "2000/01/01",
-	// 			messages: [
-	// 				{ id: 1, content: "お誕生日おめでとう！" },
-	// 				{ id: 2, content: "あけましておめでとう！" },
-	// 				{ id: 3, content: "おはよう！".repeat(30) },
-	// 			],
-	// 		},
-	// 	},
-	// };
+	return {
+		props: {
+			status: 200,
+			data: {
+				id: 1,
+				name: "taro",
+				birthday: "2000/01/01",
+				messages: [
+					{
+						id: 1,
+						content: "お誕生日おめでとう！",
+						writerName: "John",
+						objectId: 0,
+					},
+					{
+						id: 2,
+						content: "あけましておめでとう！",
+						writerName: "John",
+						objectId: 1,
+					},
+					{
+						id: 3,
+						content: "おはよう！".repeat(30),
+						writerName: "Johnnnnnnnnnnnn",
+						objectId: 2,
+					},
+				],
+			},
+		},
+	};
 
 	try {
 		const { id } = context.query;
