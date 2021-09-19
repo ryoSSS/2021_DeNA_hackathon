@@ -28,18 +28,18 @@ class MyDocument extends Document<Props>{
   content=""
 />
 <meta name="keywords" content="" />
-<meta property="og:type" content="blog" />
+<meta property="og:type" content="" />
 <meta property="og:url" content="" />
 <meta
   property="og:image"
             content={"http://localhost:80/users/"+id +"/image"}
 />
-<meta property="og:site_name" content="" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:site_name" content="HAPPLY" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:url" content="" />
 <meta name="twitter:title" content="" />
-<meta name="twitter:text:title" content="test" />
+<meta name="twitter:text:title" content="HAPPLY" />
 <meta
   name="twitter:description"
   content=''
