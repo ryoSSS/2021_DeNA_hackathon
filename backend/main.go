@@ -16,7 +16,10 @@ import (
 
 func main() {
 	e := echo.New()
-	e.Use(middleware.CORS())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"https://2021-de-na-hackathon.vercel.app/"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	conf := config.InitConfig()
 	dsn := conf.DSN()
