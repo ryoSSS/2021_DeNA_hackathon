@@ -260,7 +260,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* choco */}
 						{message.objectId === 14 && (
-							<div className="absolute top-[20%] right-[10%]">
+							<div
+								onClick={() => imageOnClick(14)}
+								className="absolute top-[20%] right-[10%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/14.svg"
@@ -272,7 +275,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* water */}
 						{message.objectId === 15 && (
-							<div className="absolute top-[10%] left-[5%]">
+							<div
+								onClick={() => imageOnClick(15)}
+								className="absolute top-[10%] left-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/15.svg"
@@ -284,7 +290,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* car */}
 						{message.objectId === 16 && (
-							<div className="absolute bottom-[45%] left-[5%]">
+							<div
+								onClick={() => imageOnClick(16)}
+								className="absolute bottom-[45%] left-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/16.svg"
@@ -296,7 +305,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* popcorn */}
 						{message.objectId === 17 && (
-							<div className="absolute bottom-[28%] right-[5%]">
+							<div
+								onClick={() => imageOnClick(17)}
+								className="absolute bottom-[28%] right-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/17.svg"
