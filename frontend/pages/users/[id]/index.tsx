@@ -67,9 +67,9 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 								placeholder="Yamada Taro"
 								name="name"
 								value={writerName}
-								className="block w-11/12 mx-auto mt-0.5 px-3 py-2 min-h-[42px] bg-transparent border-2 border-gray-900 rounded-md focus:outline-none"
+								className="block w-11/12 mx-auto mt-0.5 px-3 py-2 min-h-[42px] bg-transparent border-2 border-gray-300 rounded-md focus:outline-none"
 								onChange={(e) => setWriterName(e.target.value)}
-								maxLength={25}
+								maxLength={15}
 							/>
 						</label>
 						<button
@@ -104,7 +104,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 			<div className="fixed left-1/2 bottom-4 transform -translate-x-1/2  mx-auto">
 				<button
 					onClick={() => router.push(`/users/${_user.id}/messages`)}
-					className="block bg-white py-3 px-6 rounded-3xl shadow-md text-black font-semibold text-sm"
+					className="block bg-gray-50 py-3 px-6 rounded-3xl border-gray-100 shadow-md text-black font-semibold text-sm"
 				>
 					メッセージ一覧へ
 				</button>

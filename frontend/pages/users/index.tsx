@@ -50,9 +50,9 @@ const Users: NextPage = () => {
 			// データベースへの処理
 			// await toDatebase()
 			const res = await createUser(name, birthday);
-			const userId = res.data.userId
+			const userId = res.data.userId;
 			setLink(`${process.env.NEXT_PUBLIC_API_DOMAIN}/users/${userId}`);
-			setOpenModal(true)
+			setOpenModal(true);
 		}
 	};
 	return (
@@ -100,7 +100,7 @@ const Users: NextPage = () => {
 								value={name}
 								className="px-2 py-2 mx-auto my-2 bg-transparent border-2 border-gray-900 rounded-md w-60 focus:outline-none"
 								onChange={(e) => setName(e.target.value)}
-								maxLength={25}
+								maxLength={15}
 							/>
 							<input
 								type="text"
