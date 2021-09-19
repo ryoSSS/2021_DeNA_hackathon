@@ -11,6 +11,7 @@ import MessageBox from "../../../components/MessageBox";
 import clsx from "clsx";
 import CloseButton from "../../../components/CloseButton";
 import CarouselSelect from "../../../components/CarouselSelect";
+import OBJECTS from "../../../data/objects";
 
 type UsersIdProps = {
 	status: number;
@@ -23,15 +24,30 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [writerName, setWriterName] = useState("");
 	const [content, setContent] = useState("");
-	const [selectedIndex, setSelectedIndex] = useState(1);
 	const _user = user ? user : props.data;
+
+	const idBlackList = _user.messages.map((message) => message.objectId); // 既に他人が選択済みのオブジェクトID
+	const idWhiteList = OBJECTS.filter(
+		(object) => !idBlackList.includes(object.id)
+	).map((object) => object.id);
+	const [selectedIndex, setSelectedIndex] = useState(idWhiteList[0]);
 
 	const onselectionchange = (index: number) => {
 		setSelectedIndex(index);
 	};
 
-	const onClickMessageSendButton = () => {
-		createMessage(_user.id, content, writerName, selectedIndex);
+	const onClickMessageSendButton = async () => {
+		const res = await createMessage(
+			_user.id,
+			content,
+			writerName,
+			selectedIndex
+		);
+		if (res.error) {
+			alert("メッセージが作成できませんでした");
+			return;
+		}
+		router.push(`/users/${_user.id}/messages`);
 	};
 
 	if (props.status !== 200) {
@@ -45,14 +61,15 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 				isModalOpen && "overflow-hidden"
 			)}
 		>
-			<div className="pt-14 pb-20 w-11/12 mx-auto">
+			<div className="pt-14 pb-20 w-11/12 md:w-2/3 mx-auto">
 				<section className="flex flex-col justify-center">
 					<h1 className="text-black font-semibold text-center text-xl">
-						{_user.name} さんの誕生日をお祝いしよう！
+						{_user.name}
+						さんの誕生日をお祝いしよう！
 					</h1>
 					<p className="text-gray-500 text-center text-xs mx-14 mt-3">
-						今日は{_user.name}{" "}
-						の誕生日です。1年に1度のイベントを皆で盛り上げましょう！
+						今日は{_user.name}
+						さんの誕生日です。1年に1度のイベントを皆で盛り上げましょう！
 					</p>
 
 					<div className="mt-3 flex justify-center">
@@ -106,7 +123,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 					onClick={() => router.push(`/users/${_user.id}/messages`)}
 					className="block bg-gray-50 py-3 px-6 rounded-3xl border-gray-100 shadow-md text-black font-semibold text-sm"
 				>
-					メッセージ一覧へ
+					パーティ会場へ
 				</button>
 			</div>
 
@@ -138,7 +155,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 					<div className="w-11/12 mx-auto pt-14 pb-4">
 						<section className="">
 							<h2 className="text-center font-semibold">
-								{_user.name} さんの誕生日をお祝いしよう！
+								{_user.name}さんの誕生日をお祝いしよう！
 							</h2>
 							<div className="mt-5 flex justify-center">
 								<Image src="/gift-amico.svg" alt="" width={203} height={203} />
@@ -150,7 +167,7 @@ const UsersId: NextPage<UsersIdProps> = (props) => {
 							</h3>
 							<CarouselSelect
 								selectedIndex={selectedIndex}
-								idBlackList={_user.messages.map((message) => message.objectId)}
+								objectIdList={idWhiteList}
 								onChange={onselectionchange}
 							/>
 						</section>

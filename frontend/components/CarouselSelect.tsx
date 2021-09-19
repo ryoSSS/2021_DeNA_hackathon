@@ -5,15 +5,15 @@ import OBJECTS from "../data/objects";
 
 type Props = {
 	selectedIndex: number;
-	idBlackList: number[];
+	objectIdList: number[];
 	onChange: (index: number) => void;
 };
 
 const CarouselSelect: VFC<Props> = (props) => {
-	const { selectedIndex, idBlackList, onChange } = props;
+	const { selectedIndex, objectIdList, onChange } = props;
 
-	const whiteList = OBJECTS.filter(
-		(object) => !idBlackList.includes(object.id)
+	const whiteList = OBJECTS.filter((object) =>
+		objectIdList.includes(object.id)
 	);
 
 	return (
