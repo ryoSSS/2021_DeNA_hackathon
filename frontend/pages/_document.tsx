@@ -36,7 +36,7 @@ class MyDocument extends Document<Props>{
 />
 <meta property="og:site_name" content="" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@tcr_jp" />
+<meta name="twitter:site" content="" />
 <meta name="twitter:url" content="" />
 <meta name="twitter:title" content="" />
 <meta name="twitter:text:title" content="test" />
