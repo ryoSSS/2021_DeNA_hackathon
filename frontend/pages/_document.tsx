@@ -1,12 +1,23 @@
+import { GetServerSideProps } from 'next'
+import { DocumentInitialProps, loadGetInitialProps } from 'next/dist/shared/lib/utils'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import internal from 'stream'
 
-class MyDocument extends Document {
+interface Props{
+  initialProps?: DocumentInitialProps;
+  id: number;
+}
+
+class MyDocument extends Document<Props>{
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const { id } = ctx.query;
+   
+    return { ...initialProps,id}
   }
 
   render() {
+    const {id} = this.props
     return (
       <Html>
         <Head>
@@ -21,7 +32,7 @@ class MyDocument extends Document {
 <meta property="og:url" content="" />
 <meta
   property="og:image"
-  content="http://localhost:80/users/1/image"
+            content={"http://localhost:80/users/"+id +"/image"}
 />
 <meta property="og:site_name" content="" />
 <meta name="twitter:card" content="summary" />
@@ -64,4 +75,8 @@ class MyDocument extends Document {
   }
 }
 
+
+
 export default MyDocument
+
+
