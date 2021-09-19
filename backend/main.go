@@ -39,6 +39,8 @@ func main() {
 
 	e.GET("/users/:id", userHandler.GetWithMessages)
 
+	e.GET("/users/:id/image", userHandler.GetImage)
+
 	e.POST("/messages", messageHandler.Create)
 
 	port := os.Getenv("PORT")

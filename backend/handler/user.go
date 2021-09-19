@@ -1,9 +1,12 @@
 package handler
 
 import (
+	"fmt"
+	"image/png"
 	"net/http"
 	"strconv"
 
+	"github.com/fogleman/gg"
 	"github.com/labstack/echo/v4"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/controller"
 	"github.com/ryoSSS/2021_DeNA_hackathon/backend/model"
@@ -55,4 +58,28 @@ func (h *UserHandler) GetWithMessages(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, user)
+}
+
+func (h *UserHandler) GetImage(c echo.Context) error {
+
+	image, err := gg.LoadImage("./assets/5.png")
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	response := c.Response()
+	response.Header().Set("Cache-Control", "no-store")
+	response.Header().Set(echo.HeaderContentType, echo.MIMEOctetStream)
+	response.Header().Set(echo.HeaderAccessControlExposeHeaders, "Content-Disposition")
+	response.Header().Set(echo.HeaderContentDisposition, "attachment; filename="+"ファイル名+拡張子")
+
+	response.WriteHeader(200)
+
+	if err := png.Encode(response.Writer, image); err != nil {
+		fmt.Println("error:png\n", err)
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	return c.NoContent((http.StatusOK))
 }
