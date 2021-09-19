@@ -4,7 +4,9 @@ import useUser from "../../../hooks/useUser";
 import getUser from "../../../utils/getUser";
 import { User } from "../../../models";
 import confetti from "canvas-confetti";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
+import MessageBox from "../../../components/MessageBox";
 
 type MessagesProps = {
 	status: number;
@@ -41,9 +43,17 @@ const Messages: NextPage<MessagesProps> = (props) => {
 	}, []);
 	const { user, setUser } = useUser();
 	const _user = user ? user : props.data;
+	const [currentObjectId, setCurrentObjectId] = useState<number | null>(null);
+	const currentMessage = _user.messages.find(
+		(m) => m.objectId === currentObjectId
+	);
+
+	const imageOnClick = (objectId: number) => {
+		setCurrentObjectId(objectId);
+	};
 
 	return (
-		<>
+		<div>
 			{/* <a href="https://storyset.com/event">Event illustrations by Storyset</a> */}
 			<div className="relative w-full h-screen bg-gray-50">
 				{/* happy birthday */}
@@ -55,7 +65,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 					<div key={message.id}>
 						{/* rocket */}
 						{message.objectId === 1 && (
-							<div className="absolute top-[2%] left-[2%]">
+							<div
+								onClick={() => imageOnClick(1)}
+								className="absolute top-[2%] left-[2%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/1.svg"
@@ -67,7 +80,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* piggy bank */}
 						{message.objectId === 2 && (
-							<div className="absolute top-[10%] left-[30%]">
+							<div
+								onClick={() => imageOnClick(2)}
+								className="absolute top-[10%] left-[30%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/2.svg"
@@ -79,7 +95,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* green balloons */}
 						{message.objectId === 3 && (
-							<div className="absolute top-[20%] left-[20%]">
+							<div
+								onClick={() => imageOnClick(3)}
+								className="absolute top-[20%] left-[20%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/3.svg"
@@ -91,7 +110,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* human */}
 						{message.objectId === 4 && (
-							<div className="absolute top-[25%] right-[10%]">
+							<div
+								onClick={() => imageOnClick(4)}
+								className="absolute top-[25%] right-[10%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/4.svg"
@@ -103,7 +125,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* present box */}
 						{message.objectId === 5 && (
-							<div className="absolute top-[30%] left-[10%]">
+							<div
+								onClick={() => imageOnClick(5)}
+								className="absolute top-[30%] left-[10%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/5.svg"
@@ -115,7 +140,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* audio */}
 						{message.objectId === 6 && (
-							<div className="absolute top-[20%] left-[5%]">
+							<div
+								onClick={() => imageOnClick(6)}
+								className="absolute top-[20%] left-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/6.svg"
@@ -127,7 +155,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* food */}
 						{message.objectId === 7 && (
-							<div className="absolute top-[10%] right-[5%]">
+							<div
+								onClick={() => imageOnClick(7)}
+								className="absolute top-[10%] right-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/7.svg"
@@ -139,7 +170,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* blue balloon */}
 						{message.objectId === 8 && (
-							<div className="absolute top-[40%] right-[30%]">
+							<div
+								onClick={() => imageOnClick(8)}
+								className="absolute top-[40%] right-[30%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/8.svg"
@@ -151,7 +185,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* house */}
 						{message.objectId === 9 && (
-							<div className="absolute top-[40%] right-[5%]">
+							<div
+								onClick={() => imageOnClick(9)}
+								className="absolute top-[40%] right-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/9.svg"
@@ -163,7 +200,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* letter */}
 						{message.objectId === 10 && (
-							<div className="absolute bottom-[35%] left-[5%]">
+							<div
+								onClick={() => imageOnClick(10)}
+								className="absolute bottom-[35%] left-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/10.svg"
@@ -175,7 +215,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* coin */}
 						{message.objectId === 11 && (
-							<div className="absolute bottom-[20%] right-[5%]">
+							<div
+								onClick={() => imageOnClick(11)}
+								className="absolute bottom-[20%] right-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/11.svg"
@@ -187,7 +230,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* plant */}
 						{message.objectId === 12 && (
-							<div className="absolute bottom-[10%] left-[5%]">
+							<div
+								onClick={() => imageOnClick(12)}
+								className="absolute bottom-[10%] left-[5%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/12.svg"
@@ -199,7 +245,10 @@ const Messages: NextPage<MessagesProps> = (props) => {
 
 						{/* purple balloon */}
 						{message.objectId === 13 && (
-							<div className="absolute bottom-[0%]">
+							<div
+								onClick={() => imageOnClick(13)}
+								className="absolute bottom-[0%]"
+							>
 								<Image
 									alt="画像"
 									src="/present/13.svg"
@@ -211,11 +260,39 @@ const Messages: NextPage<MessagesProps> = (props) => {
 					</div>
 				))}
 				{/* cake */}
-				<div className="absolute bottom-[0%] right-[10%]">
+				<div className="absolute bottom-[0%] right-[10%] pointer-events-none">
 					<Image alt="画像" src="/present/cake.svg" height={400} width={400} />
 				</div>
 			</div>
-		</>
+			{/* バックドロップ */}
+			<div
+				className={clsx(
+					"absolute inset-0 bg-black transition-opacity duration-300",
+					{
+						"opacity-0 pointer-events-none": currentObjectId === null,
+						"opacity-80 pointer-events-auto": currentObjectId !== null,
+					}
+				)}
+				onClick={() => setCurrentObjectId(null)}
+			></div>
+
+			{/* モーダル */}
+			<div
+				className={clsx(
+					"fixed w-11/12 bg-white transition-opacity duration-300 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
+					{
+						"opacity-100 pointer-events-auto": currentObjectId !== null,
+						"opacity-0 pointer-events-none": currentObjectId === null,
+					}
+				)}
+			>
+				{currentObjectId !== null && (
+					<MessageBox writerName={currentMessage.writerName}>
+						{currentMessage.content}
+					</MessageBox>
+				)}
+			</div>
+		</div>
 	);
 };
 export default Messages;
