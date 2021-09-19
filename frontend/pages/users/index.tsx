@@ -1,6 +1,9 @@
 import createUser from "../../utils/createUser";
 import { NextPage } from "next";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast("コピーできました！");
 
 const Users: NextPage = () => {
 	const [name, setName] = useState<string>("");
@@ -81,13 +84,14 @@ const Users: NextPage = () => {
 							<button
 								onClick={() =>
 									navigator.clipboard.writeText(link).then(() => {
-										alert("コピーしました");
+										notify();
 									})
 								}
 								className="px-2 py-2 mx-auto my-2 font-semibold transition duration-200 bg-transparent border-2 border-gray-900 rounded-md w-60 focus:outline-none hover:bg-gray-50"
 							>
 								リンクをコピー
 							</button>
+							<Toaster />
 						</div>
 					</>
 				) : (

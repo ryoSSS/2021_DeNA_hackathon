@@ -1,8 +1,7 @@
 package handler
 
 import (
-	"fmt"
-	"image/png"
+	"image/color"
 	"net/http"
 	"strconv"
 
@@ -60,13 +59,38 @@ func (h *UserHandler) GetWithMessages(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+const (
+	baseImagePath = "./assets/happy_birthday.jpg"
+	fontPath      = "/etc/alternatives/fonts-japanese-gothic.ttf"
+)
+
 func (h *UserHandler) GetImage(c echo.Context) error {
+	id := c.Param("id")
+	userId, err := strconv.ParseInt(id, 10, 64)
 
-	image, err := gg.LoadImage("./assets/5.png")
-
+	user, err := h.userContoller.Get(userId)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err)
+		return err
 	}
+
+	dc := gg.NewContext(4267, 3200)
+	backgroundImage, err := gg.LoadImage(baseImagePath)
+	if err != nil {
+		return err
+	}
+	// ベースにのせる
+	dc.DrawImage(backgroundImage, 0, 0)
+	// font size
+	if err := dc.LoadFontFace(fontPath, 180); err != nil {
+		return err
+	}
+	// フォント色
+	dc.SetColor(color.Black)
+	// HappyBirthdayの上に表示する文字列
+	s := user.Name + " さん"
+	maxWidth := float64(dc.Width())
+	// ベースにのせる
+	dc.DrawStringWrapped(s, 1900, 700, 0, 0, maxWidth/2, 1.5, gg.AlignLeft)
 
 	response := c.Response()
 	response.Header().Set("Cache-Control", "no-store")
@@ -76,8 +100,7 @@ func (h *UserHandler) GetImage(c echo.Context) error {
 
 	response.WriteHeader(200)
 
-	if err := png.Encode(response.Writer, image); err != nil {
-		fmt.Println("error:png\n", err)
+	if err := dc.EncodePNG(response.Writer); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

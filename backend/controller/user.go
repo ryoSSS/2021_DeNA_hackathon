@@ -20,6 +20,10 @@ func (u *UserController) Create(user *model.User) (int64, error) {
 	return repository.InsertUser(u.db, user)
 }
 
+func (u *UserController) Get(userId int64) (*model.User, error) {
+	return repository.GetUser(u.db, userId)
+}
+
 func (u *UserController) GetWithMessages(userId int64) (*model.UserWithMessages, error) {
 	user, err := repository.GetUser(u.db, userId)
 	if err != nil {

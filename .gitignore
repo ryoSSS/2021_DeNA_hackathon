@@ -2,6 +2,9 @@
 
 # backend
 /backend/tmp
+/backend/image
+/backend/assets/*
+!/backend/assets/happy_birthday.jpg
 
 # db
 /db/volumes
