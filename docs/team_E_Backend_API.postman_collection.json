@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d0dd2bb3-63a4-4d78-9c05-7b635af5a0bb",
+		"_postman_id": "ab36b72f-f227-4d94-816d-93ab23c4a59a",
 		"name": "team_E_Backend_API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -23,11 +23,12 @@
 							"raw": "{\n    \"name\": \"name\",\n    \"birthday\": \"2000/01/01\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users",
+							"raw": "{{baseUrl}}/api/users",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"users"
 							]
 						}
@@ -79,11 +80,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/:id",
+							"raw": "{{baseUrl}}/api/users/:id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"users",
 								":id"
 							],
@@ -131,6 +133,32 @@
 							"body": "{\n \"id\": 1,\n \"name\": \"name\",\n \"birthday\": \"2000/01/01\",\n \"messages\": [\n  {\n   \"id\": 1,\n   \"content\": \"message\",\n   \"userId\": 1,\n   \"objectId\": 1,\n   \"writerName\": \"writer1\",\n   \"createdAt\": \"2021-09-19T04:09:00Z\"\n  },\n  {\n   \"id\": 2,\n   \"content\": \"message\",\n   \"userId\": 1,\n   \"objectId\": 2,\n   \"writerName\": \"writer2\",\n   \"createdAt\": \"2021-09-19T04:10:00Z\"\n  }\n ]\n}"
 						}
 					]
+				},
+				{
+					"name": "OGP image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:id/image",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -149,11 +177,12 @@
 					"raw": "{\n    \"content\": \"message\",\n    \"userId\": 1,\n    \"objectId\": 1,\n    \"writerName\": \"writer\"\n}"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/messages",
+					"raw": "{{baseUrl}}/api/messages",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
+						"api",
 						"messages"
 					]
 				}

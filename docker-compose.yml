@@ -1,20 +1,32 @@
 version: "3.7"
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: happily_nginx
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    extra_hosts:
+      - "localhost:$HOST_IP"
+
   backend:
     build:
       context: ./backend/
       dockerfile: Dockerfile
       target: dev
-    container_name: backend
+    container_name: happily_backend
     environment:
-      PORT: 80
+      PORT: 8080
     env_file:
       - .env
     links:
       - db
     ports:
-      - 80:80
+      - 8080:8080
     tty: true
     volumes:
       - ./backend:/go/src/github.com/ryoSSS/2021_DeNA_hackathon/backend
@@ -22,7 +34,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: db
+    container_name: happily_db
     environment:
       MYSQL_ROOT_PASSWORD: root
       TZ: "Asia/Tokyo"
@@ -37,7 +49,7 @@ services:
 
   db_migrate:
     image: migrate/migrate
-    container_name: db_migrate
+    container_name: happily_db_migrate
     links:
       - db
     volumes:
